@@ -16,10 +16,6 @@ AFRAME.registerComponent('clues-component', {
 
       this.el.appendChild(clueBox);
     });
-
-    // setTimeout((_this) => {
-    //   _this.openClueBox(_this.el.children[0].components['clue-box']);
-    // }, 5000, this);
   },
   update () {
 
@@ -57,5 +53,35 @@ AFRAME.registerComponent('clue-box', {
   },
   getMessage () {
     return this.data.message;
+  }
+});
+
+AFRAME.registerComponent('walking-trail', {
+  schema: {},
+  init () {
+
+  }
+});
+
+AFRAME.registerComponent('walking-trail-item', {
+  schema: {},
+  init () {
+    const marker = document.createElement('a-entity');
+    marker.setAttribute('geometry', 'primitive: circle; radius: 0.09');
+    marker.setAttribute('material', 'color: red');
+    marker.setAttribute('position', '0 0.01 0');
+    marker.setAttribute('rotation', '-90 0 0');
+
+    this.el.appendChild(marker);
+
+    marker.addEventListener('click', (evt) => {
+      console.log('EVT:', evt);
+
+      const camera = document.querySelector('#camera');
+      const {x, z} = marker.parentEl.getAttribute('position');
+      const newPosition = Object.assign(camera.getAttribute('position'),
+        {x: x-6.085,z});
+      camera.setAttribute('position', newPosition);
+    });
   }
 });
