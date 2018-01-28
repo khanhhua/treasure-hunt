@@ -11,7 +11,7 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="https://3d.io/releases/3dio-js/1.x.x-beta/3dio.min.js"></script>
+    <script src="https://dist.3d.io/3dio-js/1.x.x/3dio.min.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -34,7 +34,7 @@
           <a-camera id="camera" position="-6.085 0 0" rotation="0 0 0" wasd-controls="enabled: false">
             <a-entity id="hud"></a-entity>
             <a-entity cursor="fuse: true; fuseTimeout: 2000"
-                      raycaster="objects: [clue-box], [walking-trail-item]"
+                      raycaster="objects: [clue-box], [walking-trail-item]; far: 2"
                       position="0 0 -1"
                       geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.05"
                       material="color: black; shader: flat">
