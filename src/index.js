@@ -7,7 +7,7 @@ AFRAME.registerComponent('clues-component', {
   schema: {
   },
   init () {
-    this.hudCamera = document.querySelector('#hudCamera');
+    this.hud = document.querySelector('#hud');
 
     clues.forEach(clue => {
       const clueBox = document.createElement('a-entity');
@@ -25,11 +25,13 @@ AFRAME.registerComponent('clues-component', {
 
   },
   openClueBox (clueBox) {
+    Array.from(this.hud.children).forEach(item => item.remove());
+
     const message = clueBox.getMessage();
     const text = document.createElement('a-entity');
     text.setAttribute('position', '0 0.1 -0.5');
     text.setAttribute('text', `width: 1; align: center; color: #00f900; value: ${message}`);
-    this.hudCamera.appendChild(text);
+    this.hud.appendChild(text);
   }
 });
 
@@ -44,6 +46,11 @@ AFRAME.registerComponent('clue-box', {
     box.setAttribute('geometry', `primitive:box;height:0.1;depth:0.1;width:0.1`);
     box.setAttribute('material', 'color:green;');
     this.el.appendChild(box);
+
+    box.addEventListener('click', (evt) => {
+      console.log('EVT:', evt);
+      this.el.parentNode.components['clues-component'].openClueBox(this);
+    })
   },
   update () {
 
