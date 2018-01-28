@@ -1,6 +1,6 @@
 [
   {
-    "message": "That which fell on Newton's head...",
+    "message": "The age of extinction...",
     "attributes": {
       "position": "1.143 1.01 0",
       "scale": "0.121 0.121 0.121",
@@ -9,7 +9,7 @@
     "_doc": "User comes here first, reads the message and finds"
   },
   {
-    "message": "Good for Polar Bears...",
+    "message": "Good for Polar bears...",
     "attributes": {
       "position": "2.616 0.721 -3.119",
       "rotation": "0 -140.432 0",
@@ -26,6 +26,7 @@
       },
       {
         "name": "The Penguin",
+        "correct": true,
         "attributes": {
           "gltf-model":"url(/penguin_mascot/scene.gltf)",
           "scale": "0.005 0.005 0.005"

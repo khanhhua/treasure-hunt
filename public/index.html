@@ -34,7 +34,7 @@
           <a-camera id="camera" position="-6.085 0 0" rotation="0 0 0" wasd-controls="enabled: false">
             <a-entity id="hud"></a-entity>
             <a-entity cursor="fuse: true; fuseTimeout: 2000"
-                      raycaster="objects: [clue-box], [walking-trail-item]; far: 2"
+                      raycaster="objects: [clue-box], [walking-trail-item], .choice; far: 3"
                       position="0 0 -1"
                       geometry="primitive: ring; radiusInner: 0.04; radiusOuter: 0.05"
                       material="color: black; shader: flat">

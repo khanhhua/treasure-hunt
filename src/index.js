@@ -18,7 +18,8 @@ AFRAME.registerComponent('clues-component', {
       if (clue.choices) {
         data.choices = clue.choices.map(choice => ({
           name: choice.name,
-          attributes: choice.attributes
+          attributes: choice.attributes,
+          correct: choice.correct
         }));
       }
       clueBox.setAttribute('position', data.attributes.position);
@@ -32,6 +33,13 @@ AFRAME.registerComponent('clues-component', {
   },
   openClueBox (clueBox) {
     const message = clueBox.getMessage();
+    this.hudMessage(message);
+
+    if (clueBox.hasContent()) {
+      clueBox.revealContent();
+    }
+  },
+  hudMessage (message) {
     let text = this.hud.querySelector('[text]');
     if (text) {
       text.setAttribute('text', `width: 1; align: center; color: #00f900; value: ${message}`);
@@ -40,10 +48,6 @@ AFRAME.registerComponent('clues-component', {
       text.setAttribute('position', '0 0.1 -0.5');
       text.setAttribute('text', `width: 1; align: center; color: #00f900; value: ${message}`);
       this.hud.appendChild(text);
-    }
-
-    if (clueBox.hasContent()) {
-      clueBox.revealContent();
     }
   }
 });
@@ -56,7 +60,8 @@ AFRAME.registerComponent('clue-box', {
     choices: [
       {
         name: 'string',
-        attributes: 'object'
+        attributes: 'object',
+        correct: 'boolean'
       }
     ],
     revealed: {
@@ -65,7 +70,7 @@ AFRAME.registerComponent('clue-box', {
   },
   init () {
     const box = document.createElement('a-entity');
-    box.setAttribute('geometry', `primitive:sphere; radius:1.000`);
+    box.setAttribute('geometry', `primitive:sphere; radius:0.200`);
     box.setAttribute('material', `color:white; opacity:0.001`);
     this.el.appendChild(box);
 
@@ -100,6 +105,7 @@ AFRAME.registerComponent('clue-box', {
     const span = (count - 1) * 0.301;
     this.data.choices.forEach((choice, index) => {
       const choiceEl = document.createElement('a-entity');
+      choiceEl.className = 'choice';
       Object.keys(choice.attributes).forEach(attribute => {
         choiceEl.setAttribute(attribute, choice.attributes[attribute]);
       });
@@ -110,6 +116,14 @@ AFRAME.registerComponent('clue-box', {
       });
 
       choiceContainerEl.appendChild(choiceEl);
+      choiceEl.addEventListener('click', (evt) => {
+        if (choice.correct) {
+          console.log('CONGRAT!!!');
+
+          document.querySelector('[clues-component]').components['clues-component']
+            .hudMessage('You won!');
+        }
+      })
     });
 
     const animation = document.createElement('a-animation');
