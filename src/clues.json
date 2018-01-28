@@ -1,24 +1,11 @@
 [
   {
-    "clue": "That which fell on Newton's head...",
+    "message": "That which fell on Newton's head...",
     "position": "1.143 0.937 0",
-    "choices": [
-      {
-        "name": "The Apple",
-        "attributes": {
-
-        }
-      },
-      {
-        "name": "The Penguin",
-        "attributes": {
-
-        }
-      }
-    ]
+    "_doc": "User comes here first, reads the message and finds"
   },
   {
-    "clue": "Good for Polar Bears...",
+    "message": "Good for Polar Bears...",
     "position": "2.588 0.5 -2.874",
     "choices": [
       {
