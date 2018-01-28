@@ -67,7 +67,7 @@ AFRAME.registerComponent('walking-trail-item', {
   schema: {},
   init () {
     const marker = document.createElement('a-entity');
-    marker.setAttribute('geometry', 'primitive: circle; radius: 0.09');
+    marker.setAttribute('geometry', 'primitive: circle; radius: 0.5');
     marker.setAttribute('material', 'color: red');
     marker.setAttribute('position', '0 0.01 0');
     marker.setAttribute('rotation', '-90 0 0');
