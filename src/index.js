@@ -72,10 +72,14 @@ AFRAME.registerComponent('clue-box', {
     const box = document.createElement('a-entity');
     box.setAttribute('geometry', `primitive:sphere; radius:0.200`);
     box.setAttribute('material', `color:white; opacity:0.001`);
+    box.className = 'clickable';
     this.el.appendChild(box);
 
     box.addEventListener('click', (evt) => {
       console.log('EVT:', evt);
+      if (evt.target.className !== 'clickable') {
+        return;
+      }
       this.el.parentNode.components['clues-component'].openClueBox(this);
     });
 
@@ -105,7 +109,7 @@ AFRAME.registerComponent('clue-box', {
     const span = (count - 1) * 0.301;
     this.data.choices.forEach((choice, index) => {
       const choiceEl = document.createElement('a-entity');
-      choiceEl.className = 'choice';
+      choiceEl.className = 'clickable';
       Object.keys(choice.attributes).forEach(attribute => {
         choiceEl.setAttribute(attribute, choice.attributes[attribute]);
       });
@@ -154,6 +158,7 @@ AFRAME.registerComponent('walking-trail-item', {
     marker.setAttribute('material', 'color: red; opacity: 0.16');
     marker.setAttribute('position', '0 0.01 0');
     marker.setAttribute('rotation', '-90 0 0');
+    marker.className = 'clickable';
 
     this.el.appendChild(marker);
 
